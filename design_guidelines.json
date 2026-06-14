@@ -1,0 +1,135 @@
+{
+  "project_name": "Sphere IT Solution Website",
+  "theme": "light",
+  "archetype": "Archetype 4 (Swiss & High-Contrast) adapted for Corporate Light",
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Manrope",
+    "logo_font": "Outfit",
+    "heading_weights": [400, 600, 700],
+    "body_weights": [400, 500, 600],
+    "scale": {
+      "h1": "text-5xl md:text-6xl tracking-tight leading-[1.1] font-bold text-slate-900",
+      "h2": "text-3xl md:text-4xl tracking-tight leading-[1.2] font-semibold text-slate-900",
+      "h3": "text-2xl md:text-3xl tracking-tight leading-[1.3] font-semibold text-slate-900",
+      "h4": "text-xl font-medium text-slate-900",
+      "body": "text-base md:text-lg leading-relaxed text-slate-600",
+      "small": "text-sm uppercase tracking-[0.15em] font-semibold text-blue-600",
+      "button": "text-base font-semibold"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#FFFFFF",
+      "secondary": "#F8FAFC",
+      "tertiary": "#F1F5F9",
+      "inverse": "#0F172A"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#475569",
+      "tertiary": "#64748B",
+      "inverse": "#FFFFFF",
+      "brand": "#0A438C"
+    },
+    "brand": {
+      "primary": "#0A438C",
+      "primary_hover": "#0052CC",
+      "secondary": "#00A3FF",
+      "accent": "#E6F0FA"
+    },
+    "border": {
+      "default": "#E2E8F0",
+      "subtle": "#F1F5F9",
+      "focus": "#0A438C"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing, Optical Alignment, Crisp Asymmetry",
+    "container_padding": "px-6 md:px-12 lg:px-24",
+    "section_spacing": "py-20 md:py-32",
+    "grid_gap": "gap-8 md:gap-12",
+    "card_padding": "p-8 md:p-10",
+    "border_radius": {
+      "card": "rounded-2xl",
+      "button": "rounded-full",
+      "input": "rounded-lg"
+    }
+  },
+  "surface_strategies": {
+    "header": "Glassmorphism: backdrop-blur-xl bg-white/80 border-b border-slate-200. Must have z-50.",
+    "cards": "Flat solid background (bg-white), crisp 1px border (border-slate-200). Hover state: shadow-lg, -translate-y-1, border-blue-200. No heavy shadows by default.",
+    "buttons": {
+      "primary": "bg-blue-800 text-white hover:bg-blue-700 transition-colors shadow-sm",
+      "secondary": "bg-blue-50 text-blue-800 hover:bg-blue-100 transition-colors border border-blue-100",
+      "outline": "border-2 border-slate-200 text-slate-900 hover:border-slate-900 transition-colors"
+    },
+    "inputs": "bg-white border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+  },
+  "animations": {
+    "hover": "transition-all duration-300 ease-in-out",
+    "reveal": "staggered fade-up for grid items (opacity 0 to 1, translate-y-4 to 0)",
+    "micro": "button scale-down on active (active:scale-95)"
+  },
+  "assets_and_media": {
+    "icons": {
+      "library": "lucide-react",
+      "usage": "Use stroke-width 1.5. Use Globe or Hexagon icon for the brand logo placeholder alongside typography."
+    },
+    "images": [
+      {
+        "category": "hero",
+        "url": "https://images.unsplash.com/photo-1653299832314-5d3dc1e5a83c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMDNkJTIwc3BoZXJlJTIwYmx1ZXxlbnwwfHx8fDE3ODE0NjQyNjd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "3D blue sphere representing Temenos ecosystem, connection, and architecture. Use in Hero section right side."
+      },
+      {
+        "category": "about_team",
+        "url": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMHRlYW0lMjBjb3Jwb3JhdGUlMjBtZWV0aW5nfGVufDB8fHx8MTc4MTQ2NDI2N3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Corporate team meeting for the About page."
+      },
+      {
+        "category": "why_us_architecture",
+        "url": "https://images.unsplash.com/photo-1617761141732-d481912af1a9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyZSUyMGJsdWUlMjBtb2Rlcm58ZW58MHx8fHwxNzgxNDY0MjY3fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract white/blue architecture representing robust foundation."
+      },
+      {
+        "category": "service_data",
+        "url": "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjBuZXR3b3JrJTIwYmx1ZXxlbnwwfHx8fDE3ODE0NjQyODF8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract data network for Services (Integration / Cloud)."
+      },
+      {
+        "category": "service_security",
+        "url": "https://images.unsplash.com/photo-1728756666032-d0b5552b6384?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxzZWN1cml0eSUyMHNoaWVsZCUyMHRlY2hub2xvZ3klMjBibHVlfGVufDB8fHx8MTc4MTQ2NDI4MXww&ixlib=rb-4.1.0&q=85",
+        "description": "3D glass blue object for Trust/Security motifs."
+      }
+    ]
+  },
+  "pages_structure": {
+    "Navigation": "Sticky header, blur background. Links: Home, About, Why Us, Services, Contact. CTA: Book Consultation. Logo: lucide 'Globe' + 'Sphere IT Solution' text.",
+    "Home": {
+      "Hero": "Tetris Grid (cols-12). Left (col-span-7): text-6xl heading, subheadline, Primary CTA (Contact) & Secondary CTA (Services). Right (col-span-5): 3D Sphere Image (hero).",
+      "Logos": "Trusted by Section: Muted gray text, lucide icons as placeholder logos (e.g., Building, Landmark, Briefcase) distributed evenly.",
+      "Services_Preview": "3 Cards (T24 Architecture, Migration, Integration). High contrast.",
+      "Why_Us_Preview": "Split layout. Image (why_us_architecture) and bullet points."
+    },
+    "About": "Mission statement (large typography), Temenos Specialization detail, Delivery values. Image (about_team).",
+    "Why_Us": "Focus on reliability, deep domain expertise, governance. Grid layout.",
+    "Services": "6 service blocks (Control Room grid - 3 columns). T24/Transact architecture, Migration/upgrade, Integration/API, Cloud modernization, Managed support, Testing/QA. Use icons for each.",
+    "Contact": {
+      "Layout": "2 Columns. Left: Contact Information (Email, Phone, Offices, Calendly Placeholder CTA). Right: Contact Form.",
+      "Form": "Shadcn components (Input, Textarea, Select for 'Service of Interest', Button). Must have data-testid attributes."
+    },
+    "Footer": "Dark theme footer (bg-slate-900 text-slate-400). Links, copyright, and massive 'Sphere IT Solution' wordmark at the bottom."
+  },
+  "testing": {
+    "attributes": "All interactive elements, buttons, inputs, links MUST have a data-testid attribute in kebab-case (e.g., data-testid='contact-submit-button')."
+  },
+  "instructions_to_main_agent": [
+    "Use standard HTML + Tailwind for page layouts.",
+    "Use Shadcn UI ONLY for the Contact Form elements (Input, Select, Textarea, Button).",
+    "Install and use 'lucide-react' for all icons. The brand logo should be constructed using <Globe className='text-blue-800'/> accompanied by 'Sphere IT Solution' in Outfit font.",
+    "Do NOT use generic placeholder image URLs (via.placeholder.com). Use the provided Unsplash URLs in the assets_and_media section.",
+    "Strictly adhere to the color palette and typography scale. Do not use 'Inter'.",
+    "Ensure the hero image is not hidden behind a blanket dark overlay. Use a subtle gradient or no overlay if text is on a separate column."
+  ]
+}
