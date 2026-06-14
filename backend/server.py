@@ -1,12 +1,15 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import re
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, EmailStr, field_validator
+from typing import List, Optional, Annotated, Any
+from pydantic import BeforeValidator
+from bson import ObjectId
 import uuid
 from datetime import datetime, timezone
 
@@ -19,54 +22,136 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
-app = FastAPI()
-
-# Create a router with the /api prefix
+app = FastAPI(title="Sphere IT Solution API")
 api_router = APIRouter(prefix="/api")
 
 
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+# ---- Mongo helpers -----------------------------------------------------------
+def _validate_object_id(v: Any) -> str:
+    if isinstance(v, ObjectId):
+        return str(v)
+    return str(v)
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
 
-# Add your routes to the router instead of directly to app
+PyObjectId = Annotated[str, BeforeValidator(_validate_object_id)]
+
+
+class BaseDocument(BaseModel):
+    id: Optional[PyObjectId] = Field(default=None, alias="_id")
+
+    model_config = {"populate_by_name": True, "arbitrary_types_allowed": True}
+
+    @classmethod
+    def from_mongo(cls, doc: dict):
+        if not doc:
+            return None
+        return cls(**doc)
+
+    def to_mongo(self) -> dict:
+        data = self.model_dump(by_alias=True, exclude_none=True)
+        data.pop("_id", None)
+        return data
+
+
+# ---- Models ------------------------------------------------------------------
+SERVICES = [
+    "T24 / Transact Architecture",
+    "Migration / Upgrade",
+    "Integration / API",
+    "Cloud Modernization",
+    "Managed Support",
+    "Testing / QA",
+    "General Enquiry",
+]
+
+
+class ContactCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=120)
+    company: str = Field(..., min_length=1, max_length=160)
+    email: EmailStr
+    phone: str = Field(..., min_length=5, max_length=40)
+    service: str = Field(..., max_length=120)
+    message: str = Field(..., min_length=10, max_length=4000)
+    # Honeypot field for basic spam protection
+    website: Optional[str] = Field(default="", max_length=200)
+
+    @field_validator("name", "company", "phone", "message")
+    @classmethod
+    def not_blank(cls, v: str):
+        if not v or not v.strip():
+            raise ValueError("This field cannot be empty")
+        return v.strip()
+
+    @field_validator("phone")
+    @classmethod
+    def valid_phone(cls, v: str):
+        if not re.match(r"^[0-9+\-\s()]{5,40}$", v):
+            raise ValueError("Invalid phone number")
+        return v
+
+
+class Contact(BaseDocument):
+    contact_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    company: str
+    email: str
+    phone: str
+    service: str
+    message: str
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+
+class ContactResponse(BaseModel):
+    success: bool
+    message: str
+    contact_id: str
+
+
+# ---- Routes ------------------------------------------------------------------
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Sphere IT Solution API", "status": "ok"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
+@api_router.get("/services")
+async def list_services():
+    return {"services": SERVICES}
 
-# Include the router in the main app
+
+@api_router.post("/contact", response_model=ContactResponse)
+async def create_contact(payload: ContactCreate):
+    # Honeypot: silently accept but ignore bots
+    if payload.website:
+        logger.info("Spam submission blocked via honeypot")
+        return ContactResponse(success=True, message="Thank you for reaching out.", contact_id="ignored")
+
+    contact = Contact(
+        name=payload.name,
+        company=payload.company,
+        email=str(payload.email),
+        phone=payload.phone,
+        service=payload.service or "General Enquiry",
+        message=payload.message,
+    )
+    doc = contact.to_mongo()
+    await db.contacts.insert_one(doc)
+    logger.info(f"New contact enquiry from {contact.email} ({contact.company})")
+
+    # NOTE: Email notifications are a placeholder for now (per requirement).
+    # Enquiry is stored in MongoDB and can be wired to Resend/SendGrid later.
+    return ContactResponse(
+        success=True,
+        message="Thank you. Our team will get back to you within one business day.",
+        contact_id=contact.contact_id,
+    )
+
+
+@api_router.get("/contact", response_model=List[Contact])
+async def list_contacts():
+    docs = await db.contacts.find().sort("created_at", -1).to_list(1000)
+    return [Contact.from_mongo(d) for d in docs]
+
+
 app.include_router(api_router)
 
 app.add_middleware(
@@ -77,12 +162,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
