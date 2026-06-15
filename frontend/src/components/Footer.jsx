@@ -7,8 +7,18 @@ import { CONTACT, SERVICES } from "@/lib/site";
 export const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer data-testid="site-footer" className="bg-slate-900 text-slate-400">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 py-16">
+    <footer data-testid="site-footer" className="relative overflow-hidden bg-slate-900 text-slate-400">
+      {/* Subtle background watermark */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute inset-x-0 bottom-0 flex items-end justify-center overflow-hidden"
+      >
+        <span className="font-heading font-bold tracking-tighter text-white/[0.03] text-[26vw] leading-[0.8] translate-y-[18%] whitespace-nowrap">
+          sphereit
+        </span>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand */}
           <div className="lg:col-span-4">
@@ -68,13 +78,8 @@ export const Footer = () => {
         </div>
       </div>
 
-      {/* Massive wordmark */}
-      <div className="border-t border-slate-800">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-10 select-none">
-          <div className="font-heading font-bold text-slate-800 text-[14vw] leading-none tracking-tighter overflow-hidden">
-            SPHERE IT
-          </div>
-        </div>
+      {/* Bottom bar */}
+      <div className="relative border-t border-slate-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <p>© {year} Sphere IT Solution. All rights reserved.</p>
           <p>Temenos T24 / Transact Consulting · London · Singapore</p>

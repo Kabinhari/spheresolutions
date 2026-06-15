@@ -26,18 +26,22 @@ const Services = () => {
         </div>
       </section>
 
-      {/* SERVICE BLOCKS */}
-      <section className="pb-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 space-y-7">
+      {/* SERVICE BLOCKS — sticky stacking deck */}
+      <section className="pb-24 md:pb-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 2) * 0.06}>
+            <div
+              key={s.slug}
+              className="sticky pb-6"
+              style={{ top: `${100 + i * 18}px` }}
+            >
               <div
                 id={s.slug}
                 data-testid={`service-block-${s.slug}`}
-                className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 md:p-12 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300"
+                className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 md:p-12 shadow-xl shadow-slate-900/5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300"
               >
                 {/* Accent left bar */}
-                <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand to-brand-light scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-300" />
+                <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand to-brand-light" />
                 {/* Decorative glow */}
                 <div
                   className="pointer-events-none absolute -right-24 -top-24 w-72 h-72 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -81,7 +85,7 @@ const Services = () => {
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </section>
