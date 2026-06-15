@@ -290,7 +290,7 @@ const Home = () => {
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PROCESS.map((step, i) => (
               <Reveal key={step.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-white border border-slate-200 p-7 h-full shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="rounded-2xl bg-white border border-slate-200 p-7 h-full shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.05] hover:shadow-xl hover:border-blue-200">
                   <div className="flex items-center justify-between">
                     <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} flex items-center justify-center text-white shadow-md`}>
                       <step.icon className="w-5 h-5" strokeWidth={1.5} />
@@ -306,7 +306,7 @@ const Home = () => {
         </div>
       </section>
 
-      <CTABanner />
+      <CTABanner sideImage={IMAGES.team} />
     </div>
   );
 };

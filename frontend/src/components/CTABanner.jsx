@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/lib/site";
 
-export const CTABanner = () => {
+export const CTABanner = ({ sideImage }) => {
   return (
     <section data-testid="cta-banner" className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -27,24 +27,36 @@ export const CTABanner = () => {
             className="absolute -left-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-30"
             style={{ background: "radial-gradient(circle, #67E8F9, transparent 70%)" }}
           />
-          <div className="relative z-10 max-w-3xl">
-            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-white/90">
-              Start the conversation
-            </p>
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
-              Ready to modernize your Temenos core?
-            </h2>
-            <p className="mt-5 text-lg text-white/90 leading-relaxed">
-              Talk to a Temenos T24 / Transact specialist about your architecture,
-              migration or modernization goals. No obligation — just expert guidance.
-            </p>
-            <div className="mt-8">
-              <Link to="/contact" data-testid="cta-contact-button">
-                <Button className="rounded-full bg-white text-brand hover:bg-blue-50 font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto shadow-lg">
-                  Contact Us <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
+          <div className={`relative z-10 ${sideImage ? "grid gap-10 lg:grid-cols-2 lg:items-center" : "max-w-3xl"}`}>
+            <div className={sideImage ? "max-w-xl" : ""}>
+              <p className="text-sm uppercase tracking-[0.15em] font-semibold text-white/90">
+                Start the conversation
+              </p>
+              <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
+                Ready to modernize your Temenos core?
+              </h2>
+              <p className="mt-5 text-lg text-white/90 leading-relaxed">
+                Talk to a Temenos T24 / Transact specialist about your architecture,
+                migration or modernization goals. No obligation — just expert guidance.
+              </p>
+              <div className="mt-8">
+                <Link to="/contact" data-testid="cta-contact-button">
+                  <Button className="rounded-full bg-white text-brand hover:bg-blue-50 font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto shadow-lg">
+                    Contact Us <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
             </div>
+            {sideImage && (
+              <div className="relative">
+                <img
+                  src={sideImage}
+                  alt="Sphere IT Solution consultants discussing a core banking programme"
+                  className="rounded-2xl w-full aspect-[4/3] object-cover ring-1 ring-white/30 shadow-2xl"
+                  loading="lazy"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

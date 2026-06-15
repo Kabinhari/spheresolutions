@@ -49,7 +49,7 @@ export const Header = () => {
                 to={item.to}
                 data-testid={`nav-${item.label.toLowerCase().replace(/\s/g, "-")}`}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                  `px-4 py-2 rounded-full text-base font-semibold transition-colors ${
                     isActive
                       ? "text-brand bg-brand-surface"
                       : "text-slate-600 hover:text-brand"
