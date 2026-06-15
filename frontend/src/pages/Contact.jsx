@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, CalendarCheck, Loader2, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Loader2, Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -118,61 +118,45 @@ const Contact = () => {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* INFO */}
             <Reveal className="lg:col-span-5 space-y-6">
-              <div className="rounded-3xl bg-slate-900 text-white p-8 md:p-10 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid opacity-20" />
+              <div className="rounded-3xl bg-gradient-to-br from-[#0A6BD8] via-[#1597E5] to-[#22D3EE] text-white p-8 md:p-10 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid opacity-15" />
                 <div className="relative">
                   <h2 className="text-2xl font-bold font-heading">Contact details</h2>
-                  <p className="mt-2 text-slate-300 text-sm">
+                  <p className="mt-2 text-white/90 text-sm">
                     Prefer to reach out directly? We're here to help.
                   </p>
                   <div className="mt-7 space-y-5">
                     <a href={`mailto:${CONTACT.email}`} data-testid="contact-email-link" className="flex items-start gap-4 group">
-                      <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-brand-light shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0">
                         <Mail className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs uppercase tracking-wider text-slate-400">Email</p>
-                        <p className="font-medium group-hover:text-brand-light transition-colors">{CONTACT.email}</p>
+                        <p className="text-xs uppercase tracking-wider text-white/70">Email</p>
+                        <p className="font-medium group-hover:text-white/80 transition-colors">{CONTACT.email}</p>
                       </div>
                     </a>
                     <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} data-testid="contact-phone-link" className="flex items-start gap-4 group">
-                      <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-brand-light shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0">
                         <Phone className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs uppercase tracking-wider text-slate-400">Phone</p>
-                        <p className="font-medium group-hover:text-brand-light transition-colors">{CONTACT.phone}</p>
+                        <p className="text-xs uppercase tracking-wider text-white/70">Phone</p>
+                        <p className="font-medium group-hover:text-white/80 transition-colors">{CONTACT.phone}</p>
                       </div>
                     </a>
                     {CONTACT.offices.map((o) => (
                       <div key={o.city} className="flex items-start gap-4">
-                        <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-brand-light shrink-0">
+                        <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0">
                           <MapPin className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-xs uppercase tracking-wider text-slate-400">{o.city} Office</p>
-                          <p className="font-medium text-slate-200 text-sm leading-relaxed">{o.lines.join(", ")}</p>
+                          <p className="text-xs uppercase tracking-wider text-white/70">{o.city} Office</p>
+                          <p className="font-medium text-white/90 text-sm leading-relaxed">{o.lines.join(", ")}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
-
-              {/* Calendly CTA */}
-              <div className="rounded-3xl border border-slate-200 bg-white p-8">
-                <div className="w-12 h-12 rounded-xl bg-brand-surface flex items-center justify-center text-brand">
-                  <CalendarCheck className="w-6 h-6" strokeWidth={1.5} />
-                </div>
-                <h3 className="mt-5 text-xl font-semibold text-slate-900 font-heading">Book a consultation</h3>
-                <p className="mt-2 text-slate-600 leading-relaxed">
-                  Prefer to talk it through? Schedule a 30-minute call with a Temenos specialist.
-                </p>
-                <a href={CONTACT.calendlyUrl} data-testid="contact-calendly-button">
-                  <Button className="mt-6 w-full rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 h-12">
-                    <CalendarCheck className="w-4 h-4" /> Schedule via Calendly
-                  </Button>
-                </a>
               </div>
             </Reveal>
 

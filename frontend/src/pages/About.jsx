@@ -2,7 +2,7 @@ import React from "react";
 import { Target, Compass, Award, Users, Banknote, Layers } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { CTABanner } from "@/components/CTABanner";
-import { IMAGES, STATS } from "@/lib/site";
+import { IMAGES, STATS, TILE_GRADIENTS } from "@/lib/site";
 
 const VALUES = [
   { icon: Award, title: "Excellence", text: "We hold every release to banking-grade standards of quality and security." },
@@ -68,7 +68,7 @@ const About = () => {
       <section className="py-20 md:py-28 bg-slate-50/60 border-y border-slate-100">
         <div className="mx-auto max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16">
           <Reveal>
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-surface text-brand mb-5">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 text-white shadow-md mb-5">
               <Target className="w-6 h-6" strokeWidth={1.5} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Our mission</h2>
@@ -78,7 +78,7 @@ const About = () => {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-surface text-brand mb-5">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-400 text-white shadow-md mb-5">
               <Banknote className="w-6 h-6" strokeWidth={1.5} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Our specialization</h2>
@@ -87,6 +87,23 @@ const About = () => {
               the technology, but the regulatory, operational and data realities of running a core
               banking platform in production.
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CAPABILITY IMAGE */}
+      <section className="py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          <Reveal>
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-blue-200/50 to-cyan-200/50 blur-2xl" />
+              <img
+                src={IMAGES.architecture}
+                alt="Abstract blue architecture representing robust core banking foundations"
+                className="relative rounded-3xl w-full aspect-[16/6] object-cover shadow-xl ring-1 ring-slate-200"
+                loading="lazy"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -116,7 +133,7 @@ const About = () => {
             {VALUES.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.07}>
                 <div className="rounded-2xl border border-slate-200 bg-white p-8 h-full hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-brand-surface flex items-center justify-center text-brand">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} flex items-center justify-center text-white shadow-md`}>
                     <v.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-5 text-lg font-semibold text-slate-900 font-heading">{v.title}</h3>
