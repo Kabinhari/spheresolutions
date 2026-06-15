@@ -5,6 +5,7 @@ import {
   CloudCog,
   LifeBuoy,
   ShieldCheck,
+  Code2,
 } from "lucide-react";
 
 export const CONTACT = {
@@ -36,6 +37,20 @@ export const SERVICES = [
       "Reference architecture aligned to Temenos best practice",
       "Scalable, resilient and audit-ready core",
       "Clear roadmap from current to target state",
+    ],
+  },
+  {
+    slug: "development",
+    icon: Code2,
+    title: "T24 / Temenos Development",
+    short:
+      "Local development to extend your core with new functionality and customisations.",
+    description:
+      "We build local Temenos developments on top of your out-of-the-box core — new functionality, bespoke customisations, product and API extensions using L3 development, the Temenos Extensibility Framework and Design Studio, all delivered in an upgrade-safe way.",
+    outcomes: [
+      "New capabilities beyond out-of-the-box functionality",
+      "Upgrade-safe, standards-aligned customisations",
+      "Faster delivery of bank-specific requirements",
     ],
   },
   {

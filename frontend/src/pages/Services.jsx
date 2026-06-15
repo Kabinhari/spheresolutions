@@ -28,42 +28,56 @@ const Services = () => {
 
       {/* SERVICE BLOCKS */}
       <section className="pb-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 space-y-6">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12 space-y-7">
           {SERVICES.map((s, i) => (
             <Reveal key={s.slug} delay={(i % 2) * 0.06}>
               <div
                 id={s.slug}
                 data-testid={`service-block-${s.slug}`}
-                className="group rounded-3xl border border-slate-200 bg-white p-8 md:p-12 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
+                className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 md:p-12 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300"
               >
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
+                {/* Accent left bar */}
+                <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand to-brand-light scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-300" />
+                {/* Decorative glow */}
+                <div
+                  className="pointer-events-none absolute -right-24 -top-24 w-72 h-72 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "radial-gradient(circle, #E6F0FA, transparent 70%)" }}
+                />
+                {/* Large watermark number */}
+                <span className="pointer-events-none absolute right-6 top-2 font-heading font-bold text-[7rem] leading-none text-slate-50 select-none">
+                  0{i + 1}
+                </span>
+
+                <div className="relative grid lg:grid-cols-12 gap-8 items-start">
                   <div className="lg:col-span-7">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-brand-surface flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-colors shrink-0">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center text-white shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform shrink-0">
                         <s.icon className="w-7 h-7" strokeWidth={1.5} />
                       </div>
                       <div>
-                        <span className="text-xs font-semibold text-slate-400 font-heading">0{i + 1}</span>
+                        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">Service 0{i + 1}</span>
                         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">{s.title}</h2>
                       </div>
                     </div>
                     <p className="mt-6 text-lg text-slate-600 leading-relaxed">{s.description}</p>
                     <Link to="/contact" data-testid={`service-cta-${s.slug}`}>
                       <Button className="mt-7 rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-6">
-                        Discuss this service <ArrowRight className="w-4 h-4" />
+                        Discuss this service <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </Link>
                   </div>
-                  <div className="lg:col-span-5 lg:border-l lg:border-slate-100 lg:pl-8">
-                    <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand">Outcomes for your bank</p>
-                    <ul className="mt-4 space-y-3.5">
-                      {s.outcomes.map((o) => (
-                        <li key={o} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-brand mt-0.5 shrink-0" />
-                          <span className="text-slate-700 font-medium">{o}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="lg:col-span-5">
+                    <div className="rounded-2xl bg-slate-50/80 border border-slate-100 p-6 group-hover:bg-brand-surface/60 group-hover:border-blue-100 transition-colors">
+                      <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand">Outcomes for your bank</p>
+                      <ul className="mt-4 space-y-3.5">
+                        {s.outcomes.map((o) => (
+                          <li key={o} className="flex items-start gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-brand mt-0.5 shrink-0" />
+                            <span className="text-slate-700 font-medium">{o}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

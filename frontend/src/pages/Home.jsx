@@ -153,7 +153,7 @@ const Home = () => {
                   data-testid={`home-service-${s.slug}`}
                   className="group block h-full rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-200"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-brand-surface flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center text-white shadow-md shadow-blue-900/15 group-hover:scale-105 transition-transform">
                     <s.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-slate-900 font-heading">{s.title}</h3>
