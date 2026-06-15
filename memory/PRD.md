@@ -27,11 +27,17 @@ contact form. Tech: React + FastAPI + MongoDB.
 
 ## Implemented (2026-06)
 - [x] 5 responsive pages with light premium corporate design + 3D visuals.
-- [x] Sticky glass header w/ desktop + mobile nav, custom SVG sphere logo, dark footer w/ wordmark.
-- [x] Services: 6 blocks (architecture, migration, integration, cloud, support, QA) with outcomes/CTAs.
-- [x] Contact form: client + server validation, honeypot, DB storage, success/toast states.
+- [x] Sticky glass header w/ desktop + mobile nav, custom SVG sphere logo, dark footer w/ `sphereit` watermark.
+- [x] Services: 7 blocks (incl. T24/Temenos Development) in a sticky-stacking deck with outcomes/CTAs.
+- [x] FULLY STATIC build: HashRouter routing + `homepage: "."` (relative assets) for GitHub Pages.
+- [x] Contact form submits client-side to **Web3Forms** (no backend). Honeypot `botcheck`, client validation, success/toast states. Key in `REACT_APP_WEB3FORMS_KEY`.
 - [x] SEO meta tags, OG tags, page title.
-- [x] Tested: backend 10/10, frontend 20/20 (testing agent iteration_1).
+
+## Deployment (GitHub Pages)
+- `cd frontend && yarn build` → publish `build/` to the `gh-pages` branch (or repo Pages source).
+- HashRouter + relative paths mean it works under any `username.github.io/repo/` subpath without 404s.
+- Enquiries are emailed to the address registered on the Web3Forms access key.
+- NOTE: FastAPI backend (`server.py`) is now UNUSED — the site is frontend-only/static.
 
 ## Backlog
 - **P1**: Wire real email (Resend/SendGrid) for enquiry notifications + user auto-reply.

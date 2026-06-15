@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin, CalendarCheck, Loader2, Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,8 +15,8 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { CONTACT, SERVICES } from "@/lib/site";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const WEB3FORMS_KEY = process.env.REACT_APP_WEB3FORMS_KEY;
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const SERVICE_OPTIONS = [...SERVICES.map((s) => s.title), "General Enquiry"];
 
@@ -28,7 +27,7 @@ const initialForm = {
   phone: "",
   service: "",
   message: "",
-  website: "", // honeypot
+  botcheck: "", // honeypot (Web3Forms)
 };
 
 const Contact = () => {
@@ -62,15 +61,33 @@ const Contact = () => {
     }
     setSubmitting(true);
     try {
-      const { data } = await axios.post(`${API}/contact`, form);
-      setSubmitted(true);
-      toast.success(data.message || "Thank you — we'll be in touch shortly.");
-      setForm(initialForm);
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: `New website enquiry — ${form.service || "General Enquiry"}`,
+        from_name: "Sphere IT Solution Website",
+        name: form.name,
+        company: form.company,
+        email: form.email,
+        phone: form.phone,
+        service: form.service || "General Enquiry",
+        message: form.message,
+        botcheck: form.botcheck,
+      };
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+        toast.success("Thank you — we'll be in touch shortly.");
+        setForm(initialForm);
+      } else {
+        toast.error(data.message || "Something went wrong. Please try again.");
+      }
     } catch (err) {
-      const detail = err?.response?.data?.detail;
-      toast.error(
-        typeof detail === "string" ? detail : "Something went wrong. Please try again."
-      );
+      toast.error("Network error. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
     }
@@ -189,9 +206,9 @@ const Contact = () => {
                     {/* Honeypot (hidden) */}
                     <input
                       type="text"
-                      name="website"
-                      value={form.website}
-                      onChange={(e) => update("website", e.target.value)}
+                      name="botcheck"
+                      value={form.botcheck}
+                      onChange={(e) => update("botcheck", e.target.value)}
                       tabIndex={-1}
                       autoComplete="off"
                       className="hidden"

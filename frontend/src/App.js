@@ -1,6 +1,6 @@
 import React from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -12,7 +12,7 @@ import { Toaster } from "@/components/ui/sonner";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -23,7 +23,7 @@ function App() {
           </Routes>
         </Layout>
         <Toaster position="top-center" richColors />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
