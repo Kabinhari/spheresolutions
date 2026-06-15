@@ -29,72 +29,70 @@ const Home = () => {
   return (
     <div data-testid="home-page">
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-28">
-        <div className="absolute inset-0 bg-grid opacity-60" />
-        <div
-          className="absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-40"
-          style={{ background: "radial-gradient(circle, #E6F0FA, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <span className="inline-flex items-center gap-2 rounded-full bg-brand-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand">
-                  <ShieldCheck className="w-3.5 h-3.5" /> Temenos T24 / Transact Specialists
-                </span>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900">
-                  Modern core banking,<br />
-                  <span className="text-brand">delivered with confidence.</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
-                  Sphere IT Solution helps banks and financial institutions architect,
-                  migrate, integrate and modernize their Temenos T24 / Transact platforms —
-                  with the rigour and governance enterprise programmes demand.
-                </p>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <div className="mt-9 flex flex-col sm:flex-row gap-4">
-                  <Link to="/contact" data-testid="hero-contact-button">
-                    <Button className="rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto">
-                      Talk to an Expert <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                  <Link to="/services" data-testid="hero-services-button">
-                    <Button
-                      variant="outline"
-                      className="rounded-full border-2 border-slate-200 text-slate-900 hover:border-slate-900 bg-white font-semibold px-7 h-12 text-base w-full sm:w-auto"
-                    >
-                      Explore Services
-                    </Button>
-                  </Link>
-                </div>
-              </Reveal>
-            </div>
+      <section className="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-28 min-h-[600px] flex items-center">
+        {/* Professional video background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={IMAGES.hero}
+          aria-hidden="true"
+        >
+          <source src={`${process.env.PUBLIC_URL}/media/hero.mp4`} type="video/mp4" />
+        </video>
+        {/* Light overlays keep the theme bright and text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent" />
+        <div className="absolute inset-0 bg-grid opacity-20" />
 
-            <div className="lg:col-span-5">
-              <Reveal delay={0.2}>
-                <div className="relative">
-                  <div
-                    className="absolute inset-0 rounded-3xl blur-2xl opacity-40 animate-float-slow"
-                    style={{ background: "radial-gradient(circle, #00A3FF, transparent 65%)" }}
-                  />
-                  <img
-                    src={IMAGES.hero}
-                    alt="Abstract 3D sphere representing connected core banking architecture"
-                    className="relative rounded-3xl w-full aspect-square object-cover shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200"
-                    loading="eager"
-                  />
-                  <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl ring-1 ring-slate-100 px-5 py-4 hidden sm:block">
-                    <p className="text-2xl font-bold text-slate-900 font-heading">99.9%</p>
-                    <p className="text-xs text-slate-500 font-medium">Support SLA attainment</p>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
+        <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-12">
+          <div className="max-w-2xl">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur ring-1 ring-blue-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand">
+                <ShieldCheck className="w-3.5 h-3.5" /> Temenos T24 / Transact Specialists
+              </span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900">
+                Modern core banking,<br />
+                <span className="text-brand">delivered with confidence.</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+                Sphere IT Solution helps banks and financial institutions architect,
+                migrate, integrate and modernize their Temenos T24 / Transact platforms —
+                with the rigour and governance enterprise programmes demand.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div className="mt-9 flex flex-col sm:flex-row gap-4">
+                <Link to="/contact" data-testid="hero-contact-button">
+                  <Button className="rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto shadow-lg shadow-blue-900/20">
+                    Talk to an Expert <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/services" data-testid="hero-services-button">
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-2 border-slate-200 text-slate-900 hover:border-slate-900 bg-white/80 backdrop-blur font-semibold px-7 h-12 text-base w-full sm:w-auto"
+                  >
+                    Explore Services
+                  </Button>
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="mt-10 inline-flex items-center gap-4 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 px-5 py-4 shadow-lg">
+                <p className="text-3xl font-bold text-brand font-heading">99.9%</p>
+                <p className="text-xs text-slate-500 font-medium max-w-[9rem] leading-snug">
+                  Support SLA attainment across managed clients
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

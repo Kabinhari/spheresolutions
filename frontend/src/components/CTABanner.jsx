@@ -2,12 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IMAGES } from "@/lib/site";
 
 export const CTABanner = () => {
   return (
     <section data-testid="cta-banner" className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A6BD8] via-[#1597E5] to-[#22D3EE] px-8 py-16 md:px-16 md:py-20">
+        <div className="relative overflow-hidden rounded-3xl px-8 py-16 md:px-16 md:py-20">
+          {/* Relevant background image */}
+          <img
+            src={IMAGES.architecture}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Colorful brand overlay keeps it bright and readable */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A55B8]/95 via-[#1597E5]/90 to-[#22D3EE]/80" />
           <div className="absolute inset-0 bg-grid opacity-20" />
           <div
             className="absolute -right-24 -top-24 w-96 h-96 rounded-full blur-3xl opacity-40"
