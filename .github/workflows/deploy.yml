@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy static site to GitHub Pages
 
 on:
   push:
@@ -30,12 +30,17 @@ jobs:
         with:
           node-version: 20
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile --non-interactive
 
       - name: Build
         run: yarn build
         env:
+          # Create React App treats warnings as errors in CI. Keep this false so
+          # Pages deploys are not blocked by dependency-level warnings.
           CI: false
           REACT_APP_WEB3FORMS_KEY: ${{ secrets.REACT_APP_WEB3FORMS_KEY || 'e2f4e829-9980-4594-804e-81c30510aaab' }}
 
