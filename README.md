@@ -10,7 +10,7 @@ GitHub Actions.
 - Workflow: `.github/workflows/deploy.yml`
 - Source app: `frontend/`
 - Build output: `frontend/build`
-- Trigger on this branch: pushes to `development` or manual `workflow_dispatch`
+- Trigger: pushes to `main` or manual `workflow_dispatch`
 
 The `backend/` folder is not part of the production deployment. It was created
 for an earlier form/database approach, but the live contact form uses Web3Forms
@@ -24,8 +24,7 @@ In GitHub, open the repository settings and configure:
 2. `Build and deployment`
 3. Source: `GitHub Actions`
 
-The workflow will build and publish the site after the next push to the branch
-configured in `.github/workflows/deploy.yml`.
+The workflow will build and publish the site after the next push to `main`.
 
 ## Contact Form
 
