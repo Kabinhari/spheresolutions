@@ -1,45 +1,62 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTACT } from "@/lib/site";
+import { IMAGES } from "@/lib/site";
 
-export const CTABanner = () => {
+export const CTABanner = ({ sideImage }) => {
   return (
     <section data-testid="cta-banner" className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="relative overflow-hidden rounded-3xl bg-slate-900 px-8 py-16 md:px-16 md:py-20">
-          <div className="absolute inset-0 bg-grid opacity-30" />
-          <div
-            className="absolute -right-24 -top-24 w-96 h-96 rounded-full blur-3xl opacity-30"
-            style={{ background: "radial-gradient(circle, #00A3FF, transparent 70%)" }}
+        <div className="relative overflow-hidden rounded-3xl px-8 py-16 md:px-16 md:py-20">
+          {/* Relevant background image */}
+          <img
+            src={IMAGES.architecture}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="relative z-10 max-w-3xl">
-            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand-light">
-              Start the conversation
-            </p>
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
-              Ready to modernize your Temenos core?
-            </h2>
-            <p className="mt-5 text-lg text-slate-300 leading-relaxed">
-              Talk to a Temenos T24 / Transact specialist about your architecture,
-              migration or modernization goals. No obligation — just expert guidance.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link to="/contact" data-testid="cta-contact-button">
-                <Button className="rounded-full bg-white text-slate-900 hover:bg-slate-100 font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto">
-                  Contact Us <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-              <a href={CONTACT.calendlyUrl} data-testid="cta-book-button">
-                <Button
-                  variant="outline"
-                  className="rounded-full bg-transparent border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto"
-                >
-                  <CalendarCheck className="w-4 h-4" /> Book a Consultation
-                </Button>
-              </a>
+          {/* Colorful brand overlay keeps it bright and readable */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A55B8]/95 via-[#1597E5]/90 to-[#22D3EE]/80" />
+          <div className="absolute inset-0 bg-grid opacity-20" />
+          <div
+            className="absolute -right-24 -top-24 w-96 h-96 rounded-full blur-3xl opacity-40"
+            style={{ background: "radial-gradient(circle, #FFFFFF, transparent 70%)" }}
+          />
+          <div
+            className="absolute -left-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-30"
+            style={{ background: "radial-gradient(circle, #67E8F9, transparent 70%)" }}
+          />
+          <div className={`relative z-10 ${sideImage ? "grid gap-10 lg:grid-cols-2 lg:items-center" : "max-w-3xl"}`}>
+            <div className={sideImage ? "max-w-xl" : ""}>
+              <p className="text-sm uppercase tracking-[0.15em] font-semibold text-white/90">
+                Start the conversation
+              </p>
+              <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
+                Ready to modernize your Temenos core?
+              </h2>
+              <p className="mt-5 text-lg text-white/90 leading-relaxed">
+                Talk to a Temenos T24 / Transact specialist about your architecture,
+                migration or modernization goals. No obligation — just expert guidance.
+              </p>
+              <div className="mt-8">
+                <Link to="/contact" data-testid="cta-contact-button">
+                  <Button className="rounded-full bg-white text-brand hover:bg-blue-50 font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto shadow-lg">
+                    Contact Us <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
             </div>
+            {sideImage && (
+              <div className="relative">
+                <img
+                  src={sideImage}
+                  alt="Sphere IT Solution consultants discussing a core banking programme"
+                  className="rounded-2xl w-full aspect-[4/3] object-cover ring-1 ring-white/30 shadow-2xl"
+                  loading="lazy"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

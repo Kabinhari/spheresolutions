@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  CalendarCheck,
   Landmark,
   Building2,
   Briefcase,
@@ -17,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 import { CTABanner } from "@/components/CTABanner";
-import { SERVICES, STATS, IMAGES, CONTACT } from "@/lib/site";
+import { SERVICES, STATS, IMAGES, TILE_GRADIENTS } from "@/lib/site";
 
 const PROCESS = [
   { icon: Compass, title: "Assess", text: "We review your current Temenos estate, pain points and target outcomes." },
@@ -30,72 +29,70 @@ const Home = () => {
   return (
     <div data-testid="home-page">
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-28">
-        <div className="absolute inset-0 bg-grid opacity-60" />
-        <div
-          className="absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-40"
-          style={{ background: "radial-gradient(circle, #E6F0FA, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <span className="inline-flex items-center gap-2 rounded-full bg-brand-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand">
-                  <ShieldCheck className="w-3.5 h-3.5" /> Temenos T24 / Transact Specialists
-                </span>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900">
-                  Modern core banking,<br />
-                  <span className="text-brand">delivered with confidence.</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
-                  Sphere IT Solution helps banks and financial institutions architect,
-                  migrate, integrate and modernize their Temenos T24 / Transact platforms —
-                  with the rigour and governance enterprise programmes demand.
-                </p>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <div className="mt-9 flex flex-col sm:flex-row gap-4">
-                  <Link to="/contact" data-testid="hero-contact-button">
-                    <Button className="rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto">
-                      Talk to an Expert <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                  <Link to="/services" data-testid="hero-services-button">
-                    <Button
-                      variant="outline"
-                      className="rounded-full border-2 border-slate-200 text-slate-900 hover:border-slate-900 bg-white font-semibold px-7 h-12 text-base w-full sm:w-auto"
-                    >
-                      Explore Services
-                    </Button>
-                  </Link>
-                </div>
-              </Reveal>
-            </div>
+      <section className="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-28 min-h-[600px] flex items-center">
+        {/* Professional video background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={IMAGES.hero}
+          aria-hidden="true"
+        >
+          <source src={`${process.env.PUBLIC_URL}/media/hero.mp4`} type="video/mp4" />
+        </video>
+        {/* Light overlays keep the theme bright and text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/10 to-transparent" />
+        <div className="absolute inset-0 bg-grid opacity-20" />
 
-            <div className="lg:col-span-5">
-              <Reveal delay={0.2}>
-                <div className="relative">
-                  <div
-                    className="absolute inset-0 rounded-3xl blur-2xl opacity-40 animate-float-slow"
-                    style={{ background: "radial-gradient(circle, #00A3FF, transparent 65%)" }}
-                  />
-                  <img
-                    src={IMAGES.hero}
-                    alt="Abstract 3D sphere representing connected core banking architecture"
-                    className="relative rounded-3xl w-full aspect-square object-cover shadow-2xl shadow-blue-900/20 ring-1 ring-slate-200"
-                    loading="eager"
-                  />
-                  <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl ring-1 ring-slate-100 px-5 py-4 hidden sm:block">
-                    <p className="text-2xl font-bold text-slate-900 font-heading">99.9%</p>
-                    <p className="text-xs text-slate-500 font-medium">Support SLA attainment</p>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
+        <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-12">
+          <div className="max-w-2xl">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur ring-1 ring-blue-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand">
+                <ShieldCheck className="w-3.5 h-3.5" /> Temenos T24 / Transact Specialists
+              </span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900">
+                Modern core banking,<br />
+                <span className="text-brand">delivered with confidence.</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+                Sphere IT Solution helps banks and financial institutions architect,
+                migrate, integrate and modernize their Temenos T24 / Transact platforms —
+                with the rigour and governance enterprise programmes demand.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div className="mt-9 flex flex-col sm:flex-row gap-4">
+                <Link to="/contact" data-testid="hero-contact-button">
+                  <Button className="rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-7 h-12 text-base w-full sm:w-auto shadow-lg shadow-blue-900/20">
+                    Talk to an Expert <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/services" data-testid="hero-services-button">
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-2 border-slate-200 text-slate-900 hover:border-slate-900 bg-white/80 backdrop-blur font-semibold px-7 h-12 text-base w-full sm:w-auto"
+                  >
+                    Explore Services
+                  </Button>
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="mt-10 inline-flex items-center gap-4 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 px-5 py-4 shadow-lg">
+                <p className="text-3xl font-bold text-brand font-heading">99.9%</p>
+                <p className="text-xs text-slate-500 font-medium max-w-[9rem] leading-snug">
+                  Support SLA attainment across managed clients
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -108,14 +105,14 @@ const Home = () => {
           </p>
           <div className="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-6 items-center">
             {[
-              { icon: Landmark, label: "Retail Banks" },
-              { icon: Building2, label: "Corporate Banks" },
-              { icon: CircleDollarSign, label: "Wealth & Private" },
-              { icon: Briefcase, label: "FinTech & NBFI" },
+              { icon: Landmark, label: "Retail Banks", color: "text-blue-600" },
+              { icon: Building2, label: "Corporate Banks", color: "text-indigo-600" },
+              { icon: CircleDollarSign, label: "Wealth & Private", color: "text-cyan-600" },
+              { icon: Briefcase, label: "FinTech & NBFI", color: "text-sky-600" },
             ].map((item) => (
-              <div key={item.label} className="flex items-center justify-center gap-2.5 text-slate-400">
-                <item.icon className="w-6 h-6" strokeWidth={1.5} />
-                <span className="font-heading font-semibold text-sm text-slate-500">{item.label}</span>
+              <div key={item.label} className="flex items-center justify-center gap-2.5">
+                <item.icon className={`w-6 h-6 ${item.color}`} strokeWidth={1.5} />
+                <span className="font-heading font-semibold text-sm text-slate-600">{item.label}</span>
               </div>
             ))}
           </div>
@@ -153,7 +150,7 @@ const Home = () => {
                   data-testid={`home-service-${s.slug}`}
                   className="group block h-full rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-200"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center text-white shadow-md shadow-blue-900/15 group-hover:scale-105 transition-transform">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform`}>
                     <s.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-slate-900 font-heading">{s.title}</h3>
@@ -212,6 +209,52 @@ const Home = () => {
         </div>
       </section>
 
+      {/* INDUSTRY FOCUS */}
+      <section className="py-20 md:py-28 relative overflow-hidden">
+        <div
+          className="absolute -left-32 top-10 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, #CFFAFE, transparent 70%)" }}
+        />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <Reveal>
+            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand">Banking focus</p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+              Built for the realities of core banking
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              We support the full breadth of Temenos T24 / Transact functional domains — so whatever
+              your programme touches, we bring hands-on expertise.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              {[
+                { label: "Retail Banking", c: "bg-blue-50 text-blue-700 border-blue-100" },
+                { label: "Corporate Banking", c: "bg-indigo-50 text-indigo-700 border-indigo-100" },
+                { label: "Payments", c: "bg-cyan-50 text-cyan-700 border-cyan-100" },
+                { label: "Lending", c: "bg-sky-50 text-sky-700 border-sky-100" },
+                { label: "Wealth & Private", c: "bg-teal-50 text-teal-700 border-teal-100" },
+                { label: "Treasury", c: "bg-violet-50 text-violet-700 border-violet-100" },
+                { label: "Regulatory Reporting", c: "bg-blue-50 text-blue-700 border-blue-100" },
+              ].map((t) => (
+                <span key={t.label} className={`rounded-full border px-4 py-2 text-sm font-semibold ${t.c}`}>
+                  {t.label}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-cyan-200/50 to-blue-200/50 blur-2xl" />
+              <img
+                src={IMAGES.data}
+                alt="Abstract data network representing integrated banking systems"
+                className="relative rounded-3xl w-full aspect-[4/3] object-cover shadow-xl ring-1 ring-slate-200"
+                loading="lazy"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* STATS */}
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -227,15 +270,19 @@ const Home = () => {
       </section>
 
       {/* DELIVERY APPROACH */}
-      <section className="py-20 md:py-28 bg-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
+      <section className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 border-y border-slate-100">
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div
+          className="absolute -right-24 top-0 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, #DBEAFE, transparent 70%)" }}
+        />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
           <Reveal className="max-w-2xl">
-            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand-light">How we deliver</p>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-white">
+            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand">How we deliver</p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
               A proven, low-risk delivery approach
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-slate-600">
               Every engagement follows a disciplined model designed to protect your
               core, your data and your timelines.
             </p>
@@ -243,15 +290,15 @@ const Home = () => {
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PROCESS.map((step, i) => (
               <Reveal key={step.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-white/5 border border-white/10 p-7 h-full backdrop-blur-sm hover:bg-white/10 transition-colors">
+                <div className="rounded-2xl bg-white border border-slate-200 p-7 h-full shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.05] hover:shadow-xl hover:border-blue-200">
                   <div className="flex items-center justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-brand/20 flex items-center justify-center text-brand-light">
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} flex items-center justify-center text-white shadow-md`}>
                       <step.icon className="w-5 h-5" strokeWidth={1.5} />
                     </div>
-                    <span className="text-4xl font-bold text-white/10 font-heading">0{i + 1}</span>
+                    <span className="text-4xl font-bold text-slate-100 font-heading">0{i + 1}</span>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-white font-heading">{step.title}</h3>
-                  <p className="mt-2 text-sm text-slate-400 leading-relaxed">{step.text}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-slate-900 font-heading">{step.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{step.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -259,7 +306,7 @@ const Home = () => {
         </div>
       </section>
 
-      <CTABanner />
+      <CTABanner sideImage={IMAGES.team} />
     </div>
   );
 };

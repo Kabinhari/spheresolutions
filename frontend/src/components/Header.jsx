@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, CalendarCheck } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
-import { Button } from "@/components/ui/button";
-import { CONTACT } from "@/lib/site";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -44,14 +42,14 @@ export const Header = () => {
             <Logo />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 ml-auto">
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 data-testid={`nav-${item.label.toLowerCase().replace(/\s/g, "-")}`}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                  `px-4 py-2 rounded-full text-base font-semibold transition-colors ${
                     isActive
                       ? "text-brand bg-brand-surface"
                       : "text-slate-600 hover:text-brand"
@@ -62,15 +60,6 @@ export const Header = () => {
               </NavLink>
             ))}
           </nav>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <a href={CONTACT.calendlyUrl} data-testid="header-book-consultation">
-              <Button className="rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2 px-5">
-                <CalendarCheck className="w-4 h-4" />
-                Book Consultation
-              </Button>
-            </a>
-          </div>
 
           <button
             data-testid="mobile-menu-toggle"
@@ -101,12 +90,6 @@ export const Header = () => {
                 {item.label}
               </NavLink>
             ))}
-            <a href={CONTACT.calendlyUrl} data-testid="mobile-book-consultation" className="mt-2">
-              <Button className="w-full rounded-full bg-brand hover:bg-brand-hover text-white font-semibold gap-2">
-                <CalendarCheck className="w-4 h-4" />
-                Book Consultation
-              </Button>
-            </a>
           </nav>
         </div>
       )}

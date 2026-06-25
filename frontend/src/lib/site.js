@@ -120,6 +120,16 @@ export const SERVICES = [
   },
 ];
 
+export const TILE_GRADIENTS = [
+  "from-blue-500 to-cyan-400",
+  "from-indigo-500 to-blue-400",
+  "from-sky-500 to-cyan-400",
+  "from-cyan-500 to-teal-400",
+  "from-violet-500 to-indigo-400",
+  "from-blue-600 to-sky-400",
+  "from-teal-500 to-cyan-400",
+];
+
 export const STATS = [
   { value: "15+", label: "Years in core banking" },
   { value: "40+", label: "Temenos programmes delivered" },

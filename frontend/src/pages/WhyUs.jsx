@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { CTABanner } from "@/components/CTABanner";
-import { IMAGES } from "@/lib/site";
+import { IMAGES, TILE_GRADIENTS } from "@/lib/site";
 
 const REASONS = [
   {
@@ -89,7 +89,7 @@ const WhyUs = () => {
             {REASONS.map((r, i) => (
               <Reveal key={r.title} delay={i * 0.06}>
                 <div className="rounded-2xl border border-slate-200 bg-white p-8 h-full hover:-translate-y-1 hover:shadow-lg hover:border-blue-200 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-brand-surface flex items-center justify-center text-brand">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} flex items-center justify-center text-white shadow-md`}>
                     <r.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-slate-900 font-heading">{r.title}</h3>
@@ -102,29 +102,38 @@ const WhyUs = () => {
       </section>
 
       {/* COMPARISON / DIFFERENTIATORS */}
-      <section className="py-20 md:py-28 bg-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-20" />
+      <section className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-br from-blue-50 via-cyan-50 to-white border-y border-slate-100">
+        <div className="absolute inset-0 bg-grid opacity-40" />
         <div
-          className="absolute -bottom-32 -left-32 w-[36rem] h-[36rem] rounded-full blur-3xl opacity-25"
-          style={{ background: "radial-gradient(circle, #0A438C, transparent 70%)" }}
+          className="absolute -bottom-32 -left-32 w-[36rem] h-[36rem] rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, #BAE6FD, transparent 70%)" }}
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <Reveal>
-            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand-light">The difference</p>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-white">
+            <p className="text-sm uppercase tracking-[0.15em] font-semibold text-brand">The difference</p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
               Specialists, not generalists
             </h2>
-            <p className="mt-5 text-lg text-slate-300 leading-relaxed">
+            <p className="mt-5 text-lg text-slate-600 leading-relaxed">
               We don't try to be everything to everyone. Our singular focus on Temenos T24 / Transact
               means deeper expertise, fewer surprises and faster, more reliable delivery.
             </p>
+            <div className="mt-8 relative">
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-cyan-200/50 to-blue-200/50 blur-2xl" />
+              <img
+                src={IMAGES.data}
+                alt="Abstract data network representing deep integration expertise"
+                className="relative rounded-3xl w-full aspect-[16/9] object-cover shadow-xl ring-1 ring-slate-200"
+                loading="lazy"
+              />
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <ul className="grid gap-4">
               {COMPARE.map((item) => (
-                <li key={item} className="flex items-start gap-3 rounded-xl bg-white/5 border border-white/10 px-5 py-4">
-                  <CheckCircle2 className="w-5 h-5 text-brand-light mt-0.5 shrink-0" />
-                  <span className="text-slate-200 font-medium">{item}</span>
+                <li key={item} className="flex items-start gap-3 rounded-xl bg-white border border-slate-200 px-5 py-4 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+                  <CheckCircle2 className="w-5 h-5 text-brand mt-0.5 shrink-0" />
+                  <span className="text-slate-700 font-medium">{item}</span>
                 </li>
               ))}
             </ul>
